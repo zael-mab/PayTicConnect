@@ -2,27 +2,24 @@ import React from 'react';
 import { DropZoneProps } from '../interfaces/dropZoneProps';
 import ItemCard from './itemCard';
 import { useDrop } from 'react-dnd';
-import { ItemTypes } from '../utils/itemTypes';
+import { ItemTypes } from '../interfaces/itemTypes';
 
 const DropZone: React.FC<DropZoneProps> = ({ zone, otherZone }) => {
   const [{ isOver }, drop] = useDrop(() => ({
     accept: ItemTypes.ITEM,
     drop: (item: any) => {
-      console.log (item)
-      // zone.addText(item.item)
-      // zone.newItem(item.item);
+      if (item.dragedZone === zone.zoneIndex) return;
+      zone.newItem(item.item);
+      otherZone.removeItem(item.index);
     },
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),
     }),
   }));
 
-  console.log (isOver)
-
-
     return (
       <div className='rounded-lg my-2 mx-4 border border-gray-500 text-center bg-green-300 '>
-        <h1 className='shadow-lg py-4'>Drop</h1>
+        <h1 className='shadow-lg py-4'>Drop Zone {zone.zoneIndex}</h1>
         <div className='flex flex-col justify-end items-center'>
           <div className='flex items-center justify-center w-full h-full mt-4'>
             <input
@@ -46,7 +43,7 @@ const DropZone: React.FC<DropZoneProps> = ({ zone, otherZone }) => {
           className={`flex w-full flex-col justify-center items-center bg-opacity-40 bg-slate-500 p-2 ${isOver ? `bg-red-300` : ''}`}>
             {zone.items.length > 0 ? '' : <li>Add Item</li>}
             {zone.items.map((item, index) => (
-              <ItemCard item={item} index={index} key={index} />
+              <ItemCard item={item}  dragedZone={zone.zoneIndex} index={index} key={index + item} />
             ))}
           </ul>
 

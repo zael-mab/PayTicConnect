@@ -3,8 +3,8 @@ import useDropZone from '../hooks/dropZone';
 import DropZone from './DropZone';
 
 const DragAndDropComponent: React.FC = () => {
-  const firstZone = useDropZone();
-  const secondZone = useDropZone();
+  const firstZone = useDropZone(1);
+  const secondZone = useDropZone(2);
 
   return (
     <div className='bg-gray-100 flex flex-col justify-start min-h-screen'>
@@ -14,7 +14,7 @@ const DragAndDropComponent: React.FC = () => {
         </a>
       </div>
 
-      <div className='flex justify-around items-center sm:flex-row flex-col my-4 mx-2 h-full'>
+      <div className='flex justify-around items-start sm:flex-row flex-col my-4 mx-2 h-full'>
         <DropZone zone={firstZone} otherZone={secondZone}/>
         <DropZone zone={secondZone}  otherZone={firstZone}/>
       </div>
