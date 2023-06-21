@@ -14,7 +14,6 @@ const useDropZone = (zoneIndex: number) => {
     const storageKey = zoneIndex === 1 ? 'dropZoneOneItems' : 'dropZoneTwoItems';
     const storedItems = localStorage.getItem(storageKey);
     if (storedItems) {
-      // console.log (storedItems);
       setItems(JSON.parse(storedItems));
     }
   }, [zoneIndex]);
@@ -38,13 +37,10 @@ const useDropZone = (zoneIndex: number) => {
     });
   };
 
-  const newItem = (item: string) => {
-    setItems(prevItems => [...prevItems, item]);
-  };
+  // Drop
+  const newItem = (item: string) => setItems(prevItems => [...prevItems, item]);
 
-  const addText = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setText(e.target.value);
-  };
+  const addText = (e: React.ChangeEvent<HTMLInputElement>) => setText(e.target.value);
 
   const handleClear = () => {
     if (items.length === 0) return;
@@ -52,13 +48,14 @@ const useDropZone = (zoneIndex: number) => {
   };
 
   return {
+    zoneIndex,
     items,
     text,
     handleAddText,
     addText,
     handleClear,
     newItem,
-    removeItem,
+    removeItem
   };
 };
 
