@@ -9,6 +9,10 @@ const useDropZone = () => {
       setItems((prevItems) => [...prevItems, text]);
       setText('');
     };
+
+    const newItem = (item: string) => {
+      setItems((prevItems) => [...prevItems, item]);
+    };
   
     const addText = (e: React.ChangeEvent<HTMLInputElement>) => {
       setText(e.target.value);
@@ -24,6 +28,7 @@ const useDropZone = () => {
       handleAddText,
       addText,
       handleClear,
+      newItem,
     };
   };
   
