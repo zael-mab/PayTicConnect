@@ -6,7 +6,7 @@ import DragAndDropComponent from './components/drag';
 
 const App: React.FC = () => {
   return (
-    <div className=''>
+    <div>
       <DndProvider backend={HTML5Backend}>
         <DragAndDropComponent />
       </DndProvider>
