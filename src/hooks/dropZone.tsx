@@ -1,36 +1,66 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-const useDropZone = () => {
-    const [items, setItems] = useState<string[]>([]);
-    const [text, setText] = useState<string>('');
-  
-    const handleAddText = () => {
-      if (text.length === 0) return;
-      setItems((prevItems) => [...prevItems, text]);
-      setText('');
-    };
 
-    const newItem = (item: string) => {
-      setItems((prevItems) => [...prevItems, item]);
-    };
-  
-    const addText = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setText(e.target.value);
-    };
-  
-    const handleClear = () => {
-      setItems((prevItems) => prevItems.slice(0, prevItems.length - 1));
-    };
-  
-    return {
-      items,
-      text,
-      handleAddText,
-      addText,
-      handleClear,
-      newItem,
-    };
+const useDropZone = (zoneIndex: number) => {
+  // const [items, setItems] = useState<string[]>([]);
+  const storageKey = zoneIndex === 1 ? 'dropZoneOneItems' : 'dropZoneTwoItems';
+  const [items, setItems] = useState<string[]>(() => {
+    const storedItems = localStorage.getItem(storageKey);
+    return storedItems ? JSON.parse(storedItems) : [];
+  });
+  const [text, setText] = useState<string>('');
+
+  useEffect(() => {
+    const storageKey = zoneIndex === 1 ? 'dropZoneOneItems' : 'dropZoneTwoItems';
+    const storedItems = localStorage.getItem(storageKey);
+    if (storedItems) {
+      // console.log (storedItems);
+      setItems(JSON.parse(storedItems));
+    }
+  }, [zoneIndex]);
+
+  useEffect(() => {
+    const storageKey = zoneIndex === 1 ? 'dropZoneOneItems' : 'dropZoneTwoItems';
+    localStorage.setItem(storageKey, JSON.stringify(items));
+  }, [items, zoneIndex]);
+
+  const handleAddText = () => {
+    if (text.length === 0) return;
+    setItems(prevItems => [...prevItems, text]);
+    setText('');
   };
-  
 
-  export default useDropZone;
+  const removeItem = (index: number) => {
+    setItems(prevItems => {
+      const updatedItems = [...prevItems];
+      updatedItems.splice(index, 1);
+      return updatedItems;
+    });
+  };
+
+  const newItem = (item: string) => {
+    setItems(prevItems => [...prevItems, item]);
+  };
+
+  const addText = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setText(e.target.value);
+  };
+
+  const handleClear = () => {
+    if (items.length === 0) return;
+    setItems(prevItems => prevItems.slice(0, prevItems.length - 1));
+  };
+
+  return {
+    items,
+    text,
+    handleAddText,
+    addText,
+    handleClear,
+    newItem,
+    removeItem,
+  };
+};
+
+
+export default useDropZone;
