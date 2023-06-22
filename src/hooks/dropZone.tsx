@@ -53,6 +53,11 @@ const useDropZone = (zoneIndex: number) => {
     setItems(prevItems => prevItems.slice(0, prevItems.length - 1));
   };
 
+  const clearLastItemOnTable = () => {
+    if (savedItems.length === 0) return;
+    setSavedItems(prevItems => prevItems.slice(0, prevItems.length - 1));
+  };
+
   const handleSave = () => {
     if (items.length === 0) return;
     setSavedItems(prevItems => [...prevItems, ...items]);
@@ -81,6 +86,7 @@ const useDropZone = (zoneIndex: number) => {
     newItem,
     removeItem,
     updateItem,
+    clearLastItemOnTable
   };
 };
 
