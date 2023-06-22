@@ -3,6 +3,7 @@ import { DropZoneProps } from '../interfaces/dropZoneProps';
 import ItemCard from './itemCard';
 import { useDrop } from 'react-dnd';
 import { ItemTypes } from '../interfaces/itemTypes';
+import Btn from './Btn';
 
 const DropZone: React.FC<DropZoneProps> = ({ zone, otherZone }) => {
   
@@ -50,12 +51,7 @@ const DropZone: React.FC<DropZoneProps> = ({ zone, otherZone }) => {
             </ul>
 
             <div className='flex items-center justify-center h-full mt-4'>
-              <button
-                className='px-8 py-2 my-2 bg-red-300 hover:bg-red-100 hover:text-slate-800 w-full cursor-pointer rounded-md transition-all duration-300 ease-in-out mx-2'
-                onClick={zone.handleClear}
-              >
-                Clear
-              </button>
+              <Btn handleClick={zone.handleClear} text='Clear'/>
               {
                 zone.zoneIndex === 2 ? 
                 <button
