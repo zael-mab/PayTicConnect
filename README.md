@@ -32,7 +32,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
     - `components/`: Includes the React components used in the application.
     - `hooks/`: Contains custom React hooks.
-    - `interfaces/`: Contains TypeScript models and interfaces.
+    - `interfaces/`: Contains TypeScript interfaces.
     - `App.tsx`: The entry point of the application.
     - `index.tsx`: The main file that renders the React application.
 
