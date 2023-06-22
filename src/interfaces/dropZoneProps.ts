@@ -11,6 +11,7 @@ export interface DropZone {
   newItem: (item: string) => void;
   removeItem: (index: number) => void;
   handleSave: () => void;
+  clearLastItemOnTable: () => void;
   updateItem: (index: number, e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
