@@ -8,22 +8,28 @@ const useDropZone = (zoneIndex: number) => {
     const storedItems = localStorage.getItem(storageKey);
     return storedItems ? JSON.parse(storedItems) : [];
   });
+  const [savedItems, setSavedItems] = useState<string[]>(() => {
+    const storedItems = localStorage.getItem('SavedItems');
+    return storedItems ? JSON.parse(storedItems) : [];
+  });
   const [text, setText] = useState<string>('');
 
   useEffect(() => {
-    const storageKey = zoneIndex === 1 ? 'dropZoneOneItems' : 'dropZoneTwoItems';
     const storedItems = localStorage.getItem(storageKey);
     if (storedItems) {
       setItems(JSON.parse(storedItems));
     }
-  }, [zoneIndex]);
+  }, [zoneIndex, storageKey]);
 
   useEffect(() => {
-    const storageKey = zoneIndex === 1 ? 'dropZoneOneItems' : 'dropZoneTwoItems';
     localStorage.setItem(storageKey, JSON.stringify(items));
-  }, [items, zoneIndex]);
+  }, [items, zoneIndex, storageKey]);
 
-  const handleAddText = () => {
+  useEffect(() => {
+    localStorage.setItem('SavedItems', JSON.stringify(savedItems));
+  }, [savedItems]);
+
+  const handleAddItem = () => {
     if (text.length === 0) return;
     setItems(prevItems => [...prevItems, text]);
     setText('');
@@ -47,15 +53,34 @@ const useDropZone = (zoneIndex: number) => {
     setItems(prevItems => prevItems.slice(0, prevItems.length - 1));
   };
 
+  const handleSave = () => {
+    if (items.length === 0) return;
+    setSavedItems(prevItems => [...prevItems, ...items]);
+    setItems([]);
+  };
+
+  const updateItem = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    if (e.target.value.length === 0) return;
+    setItems(prevItems => {
+      const updatedItems = [...prevItems];
+      updatedItems[index] = e.target.value;
+      return updatedItems;
+    });
+  };
+
   return {
     zoneIndex,
     items,
     text,
-    handleAddText,
+    savedItems,
+    handleAddItem,
+    handleSave,
     addText,
     handleClear,
     newItem,
-    removeItem
+    removeItem,
+    updateItem,
   };
 };
 
