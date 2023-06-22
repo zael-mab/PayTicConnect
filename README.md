@@ -1,46 +1,43 @@
-# Getting Started with Create React App
+# Drag and Drop Application with TypeScript, React, and Tailwind CSS
+
+This is a web application built using TypeScript, React, and Tailwind CSS, and it implements drag and drop functionality using the react-dnd library. The application allows users to drag and drop items between two zones, one on the left and one on the right. Each drop zone contains input fields to add new items to the respective drop zone. The application also includes a "Clear" button to delete the last added item and a "Save" button that saves the items in the right drop zone to a table below the drop zones. The table displays the items along with a unique ID for each item.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+##Installation
 
-In the project directory, you can run:
+1. Clone the repository:
+``` git clone <repository_url> ```
+2. Navigate to the project directory:
+```cd <project_directory> ```
+3. Install the dependencies:
+```npm install```
 
-### `npm start`
+## Usage
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Start the development server:
+```npm start```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+2. Open your browser and [visit] (http://localhost:3000) to access the application.
 
-### `npm test`
+3. Use the drag and drop functionality to move items between the left and right drop zones. Interact with the input fields within the drop zone to add new items.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+4. Click the "Save" button to save the items in the right drop zone to the table below the drop zones. The table will display the input field values for each item, along with a unique ID.
 
-### `npm run build`
+## Project Structure
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### The project structure is organized as follows:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* `src/`: Contains the source code for the React application.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    - `components/`: Includes the React components used in the application.
+    - `hooks/`: Contains custom React hooks.
+    - `interfaces/`: Contains TypeScript models and interfaces.
+    - `App.tsx`: The entry point of the application.
+    - `index.tsx`: The main file that renders the React application.
 
-### `npm run eject`
+* `public/`: Contains the public assets and the HTML file used as a template for the application.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+* `package.json`: Defines the project dependencies and scripts.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+* `tsconfig.json`: Configures the TypeScript compiler options.
