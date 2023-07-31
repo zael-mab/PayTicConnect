@@ -4,7 +4,7 @@ This is a web application built using TypeScript, React, and Tailwind CSS, and i
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-##Installation
+## Installation
 
 1. Clone the repository:
 ``` git clone <repository_url> ```
